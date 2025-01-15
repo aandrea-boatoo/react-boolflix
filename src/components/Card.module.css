@@ -1,0 +1,18 @@
+.cardImg {
+    aspect-ratio: 16/9;
+}
+
+.cardEffect {
+    cursor: pointer;
+    transition: all 0.5s;
+    position: relative;
+}
+
+.cardEffect:hover {
+    scale: 1.2;
+    z-index: 1000;
+}
+
+.isActive {
+    border: 5px solid red;
+}
