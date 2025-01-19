@@ -4,7 +4,6 @@ const apiUrl = import.meta.env.VITE_API_URL;
 const apiKey = import.meta.env.VITE_API_KEY;
 
 const GlobalContext = createContext();
-const initialData = { type: "", message: "" };
 const GlobalProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
@@ -13,7 +12,7 @@ const GlobalProvider = ({ children }) => {
   function getData(query, endpoint) {
     setLoading(true)
     axios
-      .get(apiUrl + "/search" + endpoint, {
+      .get(apiUrl + "search/" + endpoint, {
         params: {
           api_Key: apiKey,
           query,
