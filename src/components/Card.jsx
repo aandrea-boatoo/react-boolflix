@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import style from "./Card.module.css";
+
+const imgPath = import.meta.env.VITE_IMG_PATH
 /**
  * Renders a card component with an image, title, badge, and description.
  *
@@ -11,39 +12,33 @@ import style from "./Card.module.css";
  *
  * @returns {JSX.Element} A JSX element representing the card.
  */
-function Card({
-  image = "https://picsum.photos/600/400",
-  title,
-  badge,
-  description = "Descrizione non presente",
-  id,
-  onDelete,
-}) {
-  const [border, setBorder] = useState(false);
 
-  // const [numero, setNumero] = useState(10);
-  function toggleActive() {
-    setBorder(!border);
-    console.log(border);
+const flags = ["de", "en", "es", "it", "fr"]
+function Card({ media }) {
+  const flag = flags.includes(media.original_language)
+    ? media.original_language + "png"
+    : "placeholder.jpg";
+  const drawStars = () => {
+    let stars = [];
+    for (let i = 1; i <= 5; i++) {
+      const star = i <= Math.ceil(media.vote_average / 2) ? (
+        <FaStar key={i} />
+      ) : (
+        <FaRegStar key={i} />
+      );
+      stars.push(star);
+    }
+    return stars;
   }
-
   return (
-    <div
-      className={`card ${style.cardEffect} ${border ? style.isActive : ""}`}
-      onClick={toggleActive}
-    >
-      <img
-        src={image}
-        className={`card-img-top ${style.cardImg}`}
-        alt={title}
-      />
-      <div className="card-body">
-        <h5 className="card-title">{title}</h5>
-        <p className="card-text">{description}</p>
-        <div>{badge}</div>
-        <Link to={`/pizzas/${id}`}>Vedi dettaglio</Link>
-        <button onClick={onDelete}>Delete</button>
+    <div className="cardContainer">
+      <h4>{media.title || media.name}</h4>
+      <h6>{media.overview.length > 400 ? media.overview.substring(0, 300) + "..." : media.overview}</h6>
+      <div className="flag">
+        <img src={`/img/flags/${flag}`} alt={flag} className="img-fluid" />
       </div>
+      <div className={style.cardStar}>{drawStars()}</div>
+      <img src={imgPath + media.poster_path} alt={media.title || media.name} />
     </div>
   );
 }

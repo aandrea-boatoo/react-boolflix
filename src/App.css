@@ -1,23 +1,19 @@
-body {
-    /* background-image: linear-gradient(to left,
-            transparent 0px,
-            transparent 20px,
-            rgba(0, 0, 0, 0.2) 20px,
-            rgba(0, 0, 0, 0.2) 40px),
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-        linear-gradient(to bottom,
-            transparent 0px,
-            transparent 20px,
-            rgba(0, 0, 0, 0.2) 20px,
-            rgba(0, 0, 0, 0.2) 40px);
-    background-size: 40px, 100% 40px; */
+
+header {
+    background-color: #1b1b1b;
 }
 
+#headNav {
+    font-family: "Bebas Neue", serif;
+    font-weight: 400;
+    font-size: xx-large;
+    color: red;
+}
 
-footer {
-    background-color: #333333;
-    color: white;
-    padding: 20px;
+body {
+    background-color: #2d2d2d;
 }
 
 #loader {
@@ -32,4 +28,11 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+h3 {
+    color: aliceblue;
+    margin: 350px auto;
+    width: 30%;
+    height: 30px;
 }

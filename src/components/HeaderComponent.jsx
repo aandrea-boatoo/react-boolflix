@@ -1,66 +1,33 @@
-import { NavLink } from "react-router-dom";
-const navmenu = [
-  { path: "/", label: "Home" },
-  { path: "/pizzas", label: "Elenco pizze" },
-  { path: "/contact", label: "Contact Us" },
-  { path: "/about", label: "About" },
-];
+import { useState } from "react";
+import { GlobalProvider, useGlobalContext } from "../contexts/GlobalContext";
 function HeaderComponent() {
-  function drawMenu() {
-    return navmenu.map((item) =>
-      item.path === "/pizzas" ? (
-        <li className="nav-item" key={item.path}>
-          <NavLink
-            className="nav-link"
-            to={item.path}
-            end
-            style={({ isActive }) => ({
-              color: isActive ? "red" : "black",
-            })}
-          >
-            {item.label}
-          </NavLink>
-        </li>
-      ) : (
-        <li className="nav-item" key={item.path}>
-          <NavLink
-            className="nav-link"
-            to={item.path}
-            style={({ isActive }) => ({
-              color: isActive ? "red" : "black",
-            })}
-          >
-            {item.label}
-          </NavLink>
-        </li>
-      )
-    );
+  const { search } = useGlobalContext();
+  const [query, setQuery] = useState("");
+
+  function handleInput(e) {
+    setQuery(e.target.value);
+  }
+
+  function handleClick(e) {
+    e.preventDefault();
+    search(query)
   }
   return (
     <header>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar">
         <div className="container-fluid">
-          <NavLink className="navbar-brand" to="/">
-            MyLogo
-          </NavLink>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">{drawMenu()}</ul>
-          </div>
+          <a className="navbar-brand" id="headNav">BoooBFlix</a>
+          <form className="d-flex" role="search">
+            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query" onChange={handleInput} />
+            <button className="btn btn-outline-danger" type="search" onClick={handleClick}>Search</button>
+          </form>
         </div>
       </nav>
     </header>
-  );
+
+
+  )
+
 }
 
 export default HeaderComponent;
